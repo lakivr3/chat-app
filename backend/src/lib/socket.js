@@ -22,6 +22,11 @@ io.on("connection",(socket)=>{
     console.log("user connected",socket.id)
 
     const userId = socket.handshake.query.userId
+    console.log("User ID:", userId);
+    if (userId) {
+        userSocketMap[userId] = socket.id;
+        console.log("User socket map updated:", userSocketMap);
+      }
     if(userId) userSocketMap[userId] = socket.id
 
     //io.emit() is used to send event to all the connected clients

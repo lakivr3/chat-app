@@ -58,7 +58,10 @@ export const sendMessage = async (req,res) => {
         //socketio
         const receiveSocketId = getReceiverSocketId(receiverId)
         if(receiveSocketId){
-            io.to(receiverId).emit("newMessage",newMessage)
+            console.log("sending:", receiveSocketId)
+            io.to(receiveSocketId).emit("newMessage",newMessage)
+        }else {
+            console.log("not found")
         }
     } catch (error) {
         console.log(error)
